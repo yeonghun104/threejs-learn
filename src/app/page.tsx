@@ -17,6 +17,11 @@ export default function Home() {
             03. First Three.js Project
           </Link>
         </li>
+        <li>
+          <Link href={"/lessons/04-transform-objects"}>
+            04. Transform Objects
+          </Link>
+        </li>
       </ul>
     </main>
   );
