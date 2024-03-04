@@ -11,4 +11,9 @@ export const PAGES = [
   { src: "/lessons/04-transform-objects", title: "04. Transform Objects" },
   { src: "/lessons/05-animations", title: "05. Animations" },
   { src: "/lessons/06-cameras", title: "06. Cameras" },
+  { src: "/lessons/arrow-helper", title: "arrowHelper" },
+  { src: "/lessons/vector", title: "vector" },
+  { src: "/lessons/vector2", title: "vector2" },
+  { src: "/lessons/vector3", title: "vector3" },
+  { src: "/lessons/vector4", title: "vector4" },
 ];
