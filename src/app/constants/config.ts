@@ -11,6 +11,11 @@ export const PAGES = [
   { src: "/lessons/04-transform-objects", title: "04. Transform Objects" },
   { src: "/lessons/05-animations", title: "05. Animations" },
   { src: "/lessons/06-cameras", title: "06. Cameras" },
+  {
+    src: "/lessons/07-fullscreen-and-resizing",
+    title: "07. Fullscreen and resizing",
+  },
+  { src: "/lessons/08-geometries", title: "08. Geometries" },
   { src: "/lessons/arrow-helper", title: "arrowHelper" },
   { src: "/lessons/vector", title: "vector" },
   { src: "/lessons/vector2", title: "vector2" },
