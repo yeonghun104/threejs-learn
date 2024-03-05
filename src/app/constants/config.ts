@@ -21,4 +21,5 @@ export const PAGES = [
   { src: "/lessons/vector2", title: "vector2" },
   { src: "/lessons/vector3", title: "vector3" },
   { src: "/lessons/vector4", title: "vector4" },
+  { src: "/lessons/vector5", title: "vector5" },
 ];
