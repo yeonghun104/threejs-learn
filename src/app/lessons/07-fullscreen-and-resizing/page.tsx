@@ -31,14 +31,6 @@ const Page = () => {
     // Camera
     const aspectRatio = sizes.width / sizes.height;
     const camera = new THREE.PerspectiveCamera(75, aspectRatio, 1, 1000);
-    // const camera = new THREE.OrthographicCamera(
-    //   -1 * aspectRatio,
-    //   1 * aspectRatio,
-    //   1,
-    //   -1,
-    //   0.1,
-    //   100,
-    // );
 
     camera.position.x = 2;
     camera.position.y = 2;
@@ -55,6 +47,19 @@ const Page = () => {
     window.addEventListener("mousemove", (event) => {
       cursor.x = event.clientX / sizes.width - 0.5;
       cursor.y = -(event.clientY / sizes.height - 0.5);
+    });
+
+    window.addEventListener("resize", () => {
+      // Update sizes
+      sizes.width = window.innerWidth;
+      sizes.height = window.innerHeight;
+
+      // Update camera
+      camera.aspect = sizes.width / sizes.height;
+      camera.updateProjectionMatrix();
+
+      // Update renderer
+      renderer.setSize(sizes.width, sizes.height);
     });
 
     // Controls
