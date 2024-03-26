@@ -2,31 +2,84 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import GUI from "lil-gui";
+import gsap from "gsap";
 
 const Page = () => {
   const el = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (!el.current) return;
+    /**
+     * Debug
+     */
+    const gui = new GUI({
+      width: 300,
+      title: "Nice debug UI",
+      closeFolders: true,
+    });
+    const debugObject: any = {};
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key == "h") gui.show(gui._hidden);
+    });
+
     el.current.innerHTML = "";
     const canvas = el.current;
 
     // Scene
     const scene = new THREE.Scene();
 
+    debugObject.color = "#3a6ea6";
+
     // Object
     const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2);
     const material = new THREE.MeshBasicMaterial({
-      color: 0xff0000,
+      color: "#9c7fe3",
       wireframe: true,
     });
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
+    const cubeTweaks = gui.addFolder("Awesome cube");
+    cubeTweaks.close();
+    cubeTweaks
+      .add(mesh.position, "y")
+      .min(-3)
+      .max(3)
+      .step(0.01)
+      .name("elevation");
+    cubeTweaks.add(mesh, "visible");
+    cubeTweaks.add(material, "wireframe");
+    cubeTweaks.addColor(material, "color").onChange((value: any) => {
+      console.log(value.getHexString());
+    });
+    debugObject.spin = () => {
+      gsap.to(mesh.rotation, { duration: 1, y: mesh.rotation.y + Math.PI * 2 });
+    };
+    cubeTweaks.add(debugObject, "spin");
+    debugObject.subdivision = 2;
+    cubeTweaks
+      .add(debugObject, "subdivision")
+      .min(1)
+      .max(20)
+      .step(1)
+      .onFinishChange(() => {
+        mesh.geometry.dispose();
+        mesh.geometry = new THREE.BoxGeometry(
+          1,
+          1,
+          1,
+          debugObject.subdivision,
+          debugObject.subdivision,
+          debugObject.subdivision,
+        );
+      });
+
     // Sizes
     const sizes = {
-      width: 800,
-      height: 600,
+      width: window.innerWidth,
+      height: window.innerHeight,
     };
 
     // Camera
@@ -53,7 +106,6 @@ const Page = () => {
     // Controls
     const controls = new OrbitControls(camera, canvas);
     controls.enableDamping = true;
-    // controls.target.y = 2;
     controls.update();
 
     // Renderer
@@ -68,10 +120,6 @@ const Page = () => {
       controls.update();
 
       // // Render
-      // camera.position.x = Math.sin(cursor.x * Math.PI * 2) * 2;
-      // camera.position.z = Math.cos(cursor.x * Math.PI * 2) * 2;
-      // camera.position.y = cursor.y * 3;
-      // camera.lookAt(mesh.position);
       renderer.render(scene, camera);
 
       // Call tick again on the next frame
