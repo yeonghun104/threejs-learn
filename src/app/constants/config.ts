@@ -18,6 +18,7 @@ export const PAGES = [
   { src: "/lessons/08-geometries", title: "08. Geometries" },
   { src: "/lessons/09-debug-ui", title: "09. Debug UI" },
   { src: "/lessons/10-texture", title: "10. Texture" },
+  { src: "/lessons/11-material", title: "11. Material" },
   { src: "/lessons/arrow-helper", title: "arrowHelper" },
   { src: "/lessons/vector", title: "vector" },
   { src: "/lessons/vector2", title: "vector2" },
