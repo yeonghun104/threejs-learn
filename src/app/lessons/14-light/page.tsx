@@ -39,11 +39,22 @@ function Page() {
       directionalLight.position.set(1, 0.25, 0);
       scene.add(directionalLight);
       gui.add(directionalLight, "intensity").min(0).max(3).step(0.001);
+      const directionalLightHelper = new THREE.DirectionalLightHelper(
+        directionalLight,
+        0.2,
+      );
+      scene.add(directionalLightHelper);
 
       // Hemisphere light
       const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, 3);
       scene.add(hemisphereLight);
       gui.add(hemisphereLight, "intensity").min(0).max(3).step(0.001);
+
+      const hemisphereLightHelper = new THREE.HemisphereLightHelper(
+        hemisphereLight,
+        0.9,
+      );
+      scene.add(hemisphereLightHelper);
 
       // Point light
       const pointLight = new THREE.PointLight(0xff9000, 1.5, 10, 2);
@@ -53,6 +64,9 @@ function Page() {
       gui.add(pointLight, "distance").min(0).max(3).step(0.001);
       gui.add(pointLight, "decay").min(0).max(3).step(0.001);
       gui.addColor(pointLight, "color");
+
+      const pointLightHelper = new THREE.PointLightHelper(pointLight, 0.2);
+      scene.add(pointLightHelper);
 
       // RectAreaLight
       const rectAreaLight = new THREE.RectAreaLight(0x4e00ff, 6, 1, 1);
@@ -64,6 +78,9 @@ function Page() {
       gui.add(rectAreaLight, "width").min(0).max(10).step(0.001);
       gui.add(rectAreaLight, "height").min(0).max(10).step(0.001);
       gui.addColor(rectAreaLight, "color");
+
+      const rectAreaLightHelper = new RectAreaLightHelper(rectAreaLight);
+      scene.add(rectAreaLightHelper);
 
       // SpotLight
       const spotLight = new THREE.SpotLight(
@@ -86,29 +103,11 @@ function Page() {
       gui.add(spotLight, "angle").min(0).max(10).step(0.001);
       gui.add(spotLight, "penumbra").min(0).max(10).step(0.001);
       gui.add(spotLight, "decay").min(0).max(10).step(0.001);
-      gui.add(spotLight.target.position, "x").min(0).max(10).step(0.001);
-      gui.add(spotLight.target.position, "y").min(0).max(10).step(0.001);
-
-      const hemisphereLightHelper = new THREE.HemisphereLightHelper(
-        hemisphereLight,
-        0.2,
-      );
-      scene.add(hemisphereLightHelper);
-
-      const directionalLightHelper = new THREE.DirectionalLightHelper(
-        directionalLight,
-        0.2,
-      );
-      scene.add(directionalLightHelper);
-
-      const pointLightHelper = new THREE.PointLightHelper(pointLight, 0.2);
-      scene.add(pointLightHelper);
+      gui.add(spotLight.target.position, "x").min(-10).max(10).step(0.001);
+      gui.add(spotLight.target.position, "y").min(-10).max(10).step(0.001);
 
       const spotLightHelper = new THREE.SpotLightHelper(spotLight);
       scene.add(spotLightHelper);
-
-      const rectAreaLightHelper = new RectAreaLightHelper(rectAreaLight);
-      scene.add(rectAreaLightHelper);
 
       const material = new THREE.MeshStandardMaterial({});
 
@@ -125,7 +124,6 @@ function Page() {
       );
 
       // torus
-
       const torus = new THREE.Mesh(
         new THREE.TorusGeometry(0.3, 0.2, 64, 128),
         material,
