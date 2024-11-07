@@ -551,7 +551,12 @@ function Page() {
         if (isInHouse) {
           const direction = new THREE.Vector3();
           camera.getWorldDirection(direction);
-          mokokoDistance = mokokoDistance <= 0 ? 1 : mokokoDistance - 0.0025;
+          if (mokokoDistance <= 0) {
+            mokokoDistance = 1;
+          } else {
+            mokokoDistance = mokokoDistance - 0.005;
+          }
+
           if (mokokoDistance < 0.3) {
             mokoko.material.color.set(0x8b0000);
           } else {
@@ -598,12 +603,14 @@ function Page() {
       right.y = 0;
       right.normalize();
 
-      if (event.key === "w")
+      if (event.code === "KeyW")
         camera.position.add(direction.multiplyScalar(speed));
-      if (event.key === "s")
+      if (event.code === "KeyS")
         camera.position.sub(direction.multiplyScalar(speed));
-      if (event.key === "a") camera.position.sub(right.multiplyScalar(speed));
-      if (event.key === "d") camera.position.add(right.multiplyScalar(speed));
+      if (event.code === "KeyA")
+        camera.position.sub(right.multiplyScalar(speed));
+      if (event.code === "KeyD")
+        camera.position.add(right.multiplyScalar(speed));
     };
 
     typeof window !== "undefined" &&
