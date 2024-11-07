@@ -22,6 +22,7 @@ export const PAGES = [
   { src: "/lessons/12-3d-text", title: "12. 3D Text" },
   { src: "/lessons/14-light", title: "14. Light" },
   { src: "/lessons/15-shadows", title: "15. Shadows" },
+  { src: "/lessons/16-haunted-house", title: "16. Haunted House" },
   { src: "/lessons/arrow-helper", title: "arrowHelper" },
   { src: "/lessons/vector", title: "vector" },
   { src: "/lessons/vector2", title: "vector2" },
