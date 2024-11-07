@@ -162,7 +162,7 @@ function Page() {
       wallColorTexture.colorSpace = THREE.SRGBColorSpace;
 
       const walls = new THREE.Mesh(
-        new THREE.BoxGeometry(4, 2.5, 4),
+        new THREE.BoxGeometry(6, 2.5, 6),
         new THREE.MeshStandardMaterial({
           map: wallColorTexture,
           aoMap: wallARMTexture,
@@ -205,7 +205,7 @@ function Page() {
       roofNormalTexture.wrapS = THREE.RepeatWrapping;
 
       const roof = new THREE.Mesh(
-        new THREE.ConeGeometry(3.5, 1.5, 4),
+        new THREE.ConeGeometry(5.5, 1.5, 4),
         new THREE.MeshStandardMaterial({
           map: roofColorTexture,
           aoMap: roofARMTexture,
@@ -256,7 +256,7 @@ function Page() {
         }),
       );
       door.position.y = 1;
-      door.position.z = 2 + 0.01;
+      door.position.z = 3 + 0.01;
       house.add(door);
 
       // Bushes
@@ -292,22 +292,22 @@ function Page() {
 
       const bush1 = new THREE.Mesh(bushGeometry, bushMaterial);
       bush1.scale.set(0.5, 0.5, 0.5);
-      bush1.position.set(0.8, 0.2, 2.2);
+      bush1.position.set(0.8, 0.2, 3.2);
       bush1.rotation.x = -0.75;
 
       const bush2 = new THREE.Mesh(bushGeometry, bushMaterial);
       bush2.scale.set(0.25, 0.25, 0.25);
-      bush2.position.set(1.4, 0.1, 2.1);
+      bush2.position.set(1.4, 0.1, 3.1);
       bush2.rotation.x = -0.75;
 
       const bush3 = new THREE.Mesh(bushGeometry, bushMaterial);
       bush3.scale.set(0.4, 0.4, 0.4);
-      bush3.position.set(-0.8, 0.1, 2.2);
+      bush3.position.set(-0.8, 0.1, 3.2);
       bush3.rotation.x = -0.75;
 
       const bush4 = new THREE.Mesh(bushGeometry, bushMaterial);
       bush4.scale.set(0.15, 0.15, 0.15);
-      bush4.position.set(-1, 0.05, 2.6);
+      bush4.position.set(-1, 0.05, 3.6);
       bush4.rotation.x = -0.75;
 
       house.add(bush1, bush2, bush3, bush4);
@@ -352,7 +352,7 @@ function Page() {
       for (let i = 0; i < 30; i++) {
         // Coordinates
         const angle = Math.random() * Math.PI * 2;
-        const radius = 3 + Math.random() * 4;
+        const radius = 6 + Math.random() * 4;
         const x = Math.sin(angle) * radius;
         const z = Math.cos(angle) * radius;
 
@@ -438,7 +438,7 @@ function Page() {
 
       // Door light
       const doorLight = new THREE.PointLight("#ff7d46", 5);
-      doorLight.position.set(0, 2.2, 2.5);
+      doorLight.position.set(0, 2.2, 3.5);
       house.add(doorLight);
 
       /**
@@ -467,9 +467,9 @@ function Page() {
       /**
        * Camera
        */
-      camera.position.x = 4;
+      camera.position.x = 6;
       camera.position.y = 1.5;
-      camera.position.z = 5;
+      camera.position.z = 10;
       camera.lookAt(mokoko.position.x, mokoko.position.y, mokoko.position.z);
       scene.add(camera);
 
