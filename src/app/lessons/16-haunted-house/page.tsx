@@ -4,12 +4,11 @@
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { Timer } from "three/examples/jsm/misc/Timer";
-import { Sky } from "three/examples/jsm/objects/Sky";
+import { Timer } from "three/examples/jsm/misc/Timer.js";
+import { Sky } from "three/examples/jsm/objects/Sky.js";
+import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls.js";
 import mokokoSource from "./static/mokoko/mokoko.png";
 import mokokoAlphaSource from "./static/mokoko/mokoko-alphamap.png";
-import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
 
 let isInHouse = false;
 let mokokoDistance = 1;
@@ -17,8 +16,8 @@ let mokokoDistance = 1;
 function Page() {
   const el = useRef<HTMLCanvasElement>(null);
   const sizes = {
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: typeof window !== "undefined" ? window.innerWidth : 0,
+    height: typeof window !== "undefined" ? window.innerHeight : 0,
   };
 
   // Base camera
@@ -29,22 +28,9 @@ function Page() {
     100,
   );
 
-  const textureLoader = new THREE.TextureLoader();
-
   /**
    * House
    */
-  const mokokoTexture = textureLoader.load(mokokoSource.src);
-  const mokokoAlphaTexture = textureLoader.load(mokokoAlphaSource.src);
-  const mokoko = new THREE.Mesh(
-    new THREE.PlaneGeometry(0.5, 0.5),
-    new THREE.MeshStandardMaterial({
-      roughness: 0.7,
-      map: mokokoTexture,
-      alphaMap: mokokoAlphaTexture,
-      transparent: true,
-    }),
-  );
 
   useEffect(() => {
     let requestId: number;
@@ -58,9 +44,6 @@ function Page() {
       /**
        * Base
        */
-      // Debug
-      // const gui = new GUI();
-
       // Canvas
       const canvas = el.current;
 
@@ -75,25 +58,19 @@ function Page() {
       /**
        * House
        */
-      // const mokokoTexture = textureLoader.load(
-      //   // TODO: 아무 이미지니 가져와서 넣어줘
-      //   mokokoSource.src,
-      //   // new URL("", import.meta.url).href,
-      // );
-      // const mokoko = new THREE.Mesh(
-      //   new THREE.BoxGeometry(0.5, 0.5, 0.5),
-      //   new THREE.MeshStandardMaterial({
-      //     roughness: 0.7,
-      //     map: mokokoTexture,
-      //     color: 0x8b0000,
-      //   }),
-      // );
+      const mokokoTexture = textureLoader.load(mokokoSource.src);
+      const mokokoAlphaTexture = textureLoader.load(mokokoAlphaSource.src);
+      const mokoko = new THREE.Mesh(
+        new THREE.PlaneGeometry(0.5, 0.5),
+        new THREE.MeshStandardMaterial({
+          roughness: 0.7,
+          map: mokokoTexture,
+          alphaMap: mokokoAlphaTexture,
+          transparent: true,
+        }),
+      );
       mokoko.position.y = 0.5;
       scene.add(mokoko);
-
-      if (camera.position.z < -2 && camera.position.z < 2) {
-        mokoko.position.z = camera.position.z - 1;
-      }
 
       // Floor
       const floorAlphaTexture = textureLoader.load(
@@ -158,19 +135,6 @@ function Page() {
       );
       floor.rotation.x = -Math.PI * 0.5;
       scene.add(floor);
-
-      // gui
-      //   .add(floor.material, "displacementScale")
-      //   .min(0)
-      //   .max(1)
-      //   .step(0.001)
-      //   .name("floorDisplacementScale");
-      // gui
-      //   .add(floor.material, "displacementBias")
-      //   .min(-1)
-      //   .max(1)
-      //   .step(0.001)
-      //   .name("floorDisplacementBias");
 
       // House container
       const house = new THREE.Group();
@@ -480,19 +444,25 @@ function Page() {
       /**
        * Sizes
        */
-      window.addEventListener("resize", () => {
-        // Update sizes
-        sizes.width = window.innerWidth;
-        sizes.height = window.innerHeight;
+      typeof window !== "undefined" &&
+        window.addEventListener("resize", () => {
+          // Update sizes
+          sizes.width = typeof window !== "undefined" ? window.innerWidth : 0;
+          sizes.height = typeof window !== "undefined" ? window.innerHeight : 0;
 
-        // Update camera
-        camera.aspect = sizes.width / sizes.height;
-        camera.updateProjectionMatrix();
+          // Update camera
+          camera.aspect = sizes.width / sizes.height;
+          camera.updateProjectionMatrix();
 
-        // Update renderer
-        renderer.setSize(sizes.width, sizes.height);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      });
+          // Update renderer
+          renderer.setSize(sizes.width, sizes.height);
+          renderer.setPixelRatio(
+            Math.min(
+              typeof window !== "undefined" ? window.devicePixelRatio : 1,
+              2,
+            ),
+          );
+        });
 
       /**
        * Camera
@@ -504,13 +474,12 @@ function Page() {
       scene.add(camera);
 
       // Controls
-      const controls = new PointerLockControls(camera, document.body);
-      document.body.addEventListener("click", function () {
-        controls.lock();
-      });
-
-      // const controls = new OrbitControls(camera, canvas);
-      // controls.enableDamping = true;
+      if (typeof document !== "undefined") {
+        const controls = new PointerLockControls(camera, document.body);
+        document.body.addEventListener("click", function () {
+          controls.lock();
+        });
+      }
 
       /**
        * Renderer
@@ -519,7 +488,12 @@ function Page() {
         canvas: canvas,
       });
       renderer.setSize(sizes.width, sizes.height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(
+        Math.min(
+          typeof window !== "undefined" ? window.devicePixelRatio : 1,
+          2,
+        ),
+      );
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -571,6 +545,9 @@ function Page() {
           Math.sin(ghost3Angle * 2.34) *
           Math.sin(ghost3Angle * 3.45);
 
+        if (camera.position.distanceTo(mokoko.position) < 2) {
+          isInHouse = true;
+        }
         if (isInHouse) {
           const direction = new THREE.Vector3();
           camera.getWorldDirection(direction);
@@ -592,7 +569,7 @@ function Page() {
         renderer.render(scene, camera);
 
         // Call tick again on the next frame
-        window.requestAnimationFrame(tick);
+        typeof window !== "undefined" && window.requestAnimationFrame(tick);
       };
 
       tick();
@@ -609,7 +586,6 @@ function Page() {
   useEffect(() => {
     console.log(11);
     const handleKeyDown = (event: KeyboardEvent) => {
-      console.log(event);
       const speed = 0.2;
       // 카메라의 방향 벡터를 얻고, 정규화하여 크기를 1로 만듭니다.
       const direction = new THREE.Vector3();
@@ -629,16 +605,14 @@ function Page() {
         camera.position.sub(direction.multiplyScalar(speed));
       if (event.key === "a") camera.position.sub(right.multiplyScalar(speed));
       if (event.key === "d") camera.position.add(right.multiplyScalar(speed));
-
-      if (camera.position.distanceTo(mokoko.position) < 2) {
-        isInHouse = true;
-      }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    typeof window !== "undefined" &&
+      window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      typeof window !== "undefined" &&
+        window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
