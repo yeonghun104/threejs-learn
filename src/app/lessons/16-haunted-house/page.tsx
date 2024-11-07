@@ -584,7 +584,6 @@ function Page() {
 
   // 키 이벤트 핸들러
   useEffect(() => {
-    console.log(11);
     const handleKeyDown = (event: KeyboardEvent) => {
       const speed = 0.2;
       // 카메라의 방향 벡터를 얻고, 정규화하여 크기를 1로 만듭니다.
@@ -598,7 +597,7 @@ function Page() {
       right.crossVectors(direction, camera.up).normalize();
       right.y = 0;
       right.normalize();
-      console.log(event);
+
       if (event.key === "w")
         camera.position.add(direction.multiplyScalar(speed));
       if (event.key === "s")
