@@ -5,8 +5,6 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import mokokoSource from "./mokoko.png";
-import minecraftSource from "./minecraft.png";
 import checkerboard1024Source from "./checkerboard-1024x1024.png";
 
 import GUI from "lil-gui";
