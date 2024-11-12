@@ -552,9 +552,9 @@ function Page() {
           const direction = new THREE.Vector3();
           camera.getWorldDirection(direction);
           if (mokokoDistance <= 0) {
-            mokokoDistance = 1;
+            isInHouse = false;
           } else {
-            mokokoDistance = mokokoDistance - 0.005;
+            mokokoDistance = mokokoDistance - 0.03;
           }
 
           if (mokokoDistance < 0.3) {
