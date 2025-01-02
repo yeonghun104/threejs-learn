@@ -25,6 +25,18 @@ export const PAGES = [
   { src: "/lessons/16-haunted-house", title: "16. Haunted House" },
   { src: "/lessons/17-particles", title: "17. Particles" },
   { src: "/lessons/18-galaxy-generator", title: "18. Galaxy Generator" },
+  {
+    src: "/lessons/19-scroll-based-animation",
+    title: "19. Scroll Based Animation",
+  },
+  {
+    src: "/lessons/24-environment-map",
+    title: "24. Environment Map",
+  },
+  {
+    src: "/lessons/25-realistic-render",
+    title: "25. Realistic render",
+  },
   { src: "/lessons/arrow-helper", title: "arrowHelper" },
   { src: "/lessons/vector", title: "vector" },
   { src: "/lessons/vector2", title: "vector2" },
