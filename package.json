@@ -9,10 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/drei": "^9.120.8",
     "@types/three": "^0.171.0",
     "gsap": "3.12",
     "lil-gui": "^0.19.2",
-    "next": "^14.2.22",
+    "next": "^14.2.23",
     "react": "^18",
     "react-dom": "^18",
     "three": "^0.171.0"

@@ -37,6 +37,14 @@ export const PAGES = [
     src: "/lessons/25-realistic-render",
     title: "25. Realistic render",
   },
+  {
+    src: "/lessons/55-first-R3F-application",
+    title: "55. First R3F Application",
+  },
+  {
+    src: "/lessons/56-drei",
+    title: "56. Drei",
+  },
   { src: "/lessons/arrow-helper", title: "arrowHelper" },
   { src: "/lessons/vector", title: "vector" },
   { src: "/lessons/vector2", title: "vector2" },
