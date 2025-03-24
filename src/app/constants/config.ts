@@ -45,6 +45,15 @@ export const PAGES = [
     src: "/lessons/56-drei",
     title: "56. Drei",
   },
+  { src: "/lessons/57-debug", title: "57. Debug" },
+  {
+    src: "/lessons/58-environment-and-staging",
+    title: "58. Environment and Staging",
+  },
+  {
+    src: "/lessons/59-load-models",
+    title: "59. Load Models",
+  },
   { src: "/lessons/arrow-helper", title: "arrowHelper" },
   { src: "/lessons/vector", title: "vector" },
   { src: "/lessons/vector2", title: "vector2" },
