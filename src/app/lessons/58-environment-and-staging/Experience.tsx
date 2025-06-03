@@ -1,19 +1,6 @@
-import { useThree, useFrame } from "@react-three/fiber";
-import {
-  AccumulativeShadows,
-  BakeShadows,
-  SoftShadows,
-  OrbitControls,
-  RandomizedLight,
-  useHelper,
-  ContactShadows,
-  Sky,
-  Environment,
-  Lightformer,
-  Stage,
-} from "@react-three/drei";
-import { useEffect, useRef } from "react";
-import { Perf } from "r3f-perf";
+import { useFrame, useThree } from "@react-three/fiber";
+import { Stage, useHelper } from "@react-three/drei";
+import { useRef } from "react";
 import * as THREE from "three";
 import { useControls } from "leva";
 

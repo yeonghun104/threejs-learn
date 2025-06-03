@@ -54,6 +54,10 @@ export const PAGES = [
     src: "/lessons/59-load-models",
     title: "59. Load Models",
   },
+  {
+    src: "/lessons/63-post-processing-with-r3f",
+    title: "63. Post Processing With R3F",
+  },
   { src: "/lessons/arrow-helper", title: "arrowHelper" },
   { src: "/lessons/vector", title: "vector" },
   { src: "/lessons/vector2", title: "vector2" },
